@@ -1,0 +1,676 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LocationsEntity {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  street: String!
+  streetType: String!
+  country: String!
+  number: String!
+  flat: String!
+  zipCode: String!
+  province: String!
+  city: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type NotificationsEntity {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  description: String!
+  read: Boolean!
+  link: String!
+  member: Members!
+}
+
+type Members {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  name: String!
+  lastName: String!
+  password: String!
+  isUpdated: Boolean!
+  role: String!
+  identifier: String!
+  delegation: String!
+  identifierType: String!
+  confirmed: Boolean!
+  customID: String!
+  location: LocationsEntity!
+  notifications: [NotificationsEntity!]!
+}
+
+type EventsDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  delegation: [String!]!
+  startHour: String!
+  endHour: String!
+  startDate: String!
+  endDate: String!
+  ticketPrice: Float
+  location: LocationsEntity!
+  image: String!
+  imageName: String!
+  name: String!
+  description: String!
+  allowed: [String!]!
+  buyTicketsLink: String
+  releaseDate: String!
+  released: Boolean!
+}
+
+type EventResponseDto {
+  count: Float!
+  offset: Float!
+  limit: Float!
+  order: [String!]!
+  key: String!
+  data: [EventsDto!]!
+}
+
+type DeleteEventDto {
+  id: Int!
+}
+
+type MemberWithQrDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  name: String!
+  lastName: String!
+  password: String!
+  isUpdated: Boolean!
+  role: Roles!
+  identifier: String!
+  delegation: String!
+  identifierType: IdentifierTypes!
+  confirmed: Boolean!
+  customID: String!
+  location: LocationsEntity!
+  notifications: [NotificationsEntity!]!
+  qr: String!
+}
+
+enum Roles {
+  Admin
+  miembro
+  voluntario
+  empleado
+  beneficiario
+  amigo
+  contactoInteres
+}
+
+enum IdentifierTypes {
+  passport
+  dniNif
+  nie
+}
+
+type MembersResponseDto {
+  count: Float!
+  offset: Float!
+  limit: Float!
+  order: [String!]!
+  key: String!
+  data: [Members!]!
+}
+
+type getActivitiesDto {
+  data: [String!]!
+}
+
+type DownloadTableDto {
+  data: String!
+  filename: String!
+}
+
+type GetHallDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  member: Members!
+  date: String!
+  hour: String!
+  activity: String!
+}
+
+type GetAllHallDto {
+  count: Float!
+  offset: Float!
+  limit: Float!
+  order: [String!]!
+  key: String!
+  data: [GetHallDto!]!
+}
+
+type RegisterResponseDto {
+  message: String!
+  email: String!
+  id: Int!
+}
+
+type DeleteUserResponseDto {
+  message: String!
+  email: String!
+  id: Float!
+}
+
+type UpdateUserResponseDto {
+  message: String!
+  id: Float!
+  email: String!
+}
+
+type UsersDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  name: String!
+  lastName: String!
+  password: String!
+  role: Roles!
+}
+
+type LoginResponseDto {
+  user: UsersDto!
+  token: String!
+  message: String!
+}
+
+type LoginAppResponseDto {
+  member: Members!
+  token: String!
+  message: String!
+}
+
+type Allowed {
+  miembro: Boolean!
+  voluntario: Boolean!
+  empleado: Boolean!
+  beneficiario: Boolean!
+  amigo: Boolean!
+  contactoInteres: Boolean!
+}
+
+type PermissionsDto {
+  id: Int!
+  name: String!
+  allowed: Allowed!
+}
+
+type DeleteContentFeedDto {
+  id: Int!
+}
+
+type ContentFeedDto {
+  id: Int!
+  createdAt: DateTime!
+  allowed: [String!]!
+  categories: [String!]!
+  name: String!
+  delegations: [String!]!
+  releaseDate: String!
+  released: Boolean!
+  post: String!
+  image: String!
+  imageName: String!
+}
+
+type GetAllContentFeedDto {
+  count: Int!
+  offset: Int!
+  limit: Int!
+  key: String
+  order: [String!]!
+  data: [ContentFeedDto!]!
+}
+
+type DeleteMagazineDto {
+  id: Int!
+}
+
+type MagazineDto {
+  id: Int!
+  createdAt: DateTime!
+  name: String!
+  description: String!
+  category: String!
+  pdf: String!
+  allowed: [String!]!
+  pdfName: String!
+}
+
+type AllMagazineResponseDto {
+  count: Float!
+  offset: Float!
+  limit: Float!
+  order: [String!]!
+  key: String!
+  data: [MagazineDto!]!
+}
+
+type CreateAppointmentResponseDto {
+  message: String!
+}
+
+type CreateSuggestionResponseDto {
+  message: String!
+}
+
+type MailerSettingsDto {
+  id: Int!
+  name: MailerSettings!
+  email: String!
+}
+
+enum MailerSettings {
+  Asamblea
+  Cancilleria
+  Andalucia
+  Asturias
+  Baleares
+  Canarias
+  Cantabria
+  Castilla
+  Cataluna
+  Galicia
+  Madrid
+  NavarraYAragon
+  Valencia
+  Sugerencias
+}
+
+type NotificationDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  description: String!
+  read: Boolean!
+  link: String!
+  member: Members!
+}
+
+type CustomNotificationResponseDto {
+  message: String!
+}
+
+type ScheduleMessageDto {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  passage: String!
+  description: String!
+  message: String!
+  released: Boolean!
+  releaseDate: String!
+}
+
+type GospelResponseDto {
+  count: Float!
+  offset: Float!
+  limit: Float!
+  order: [String!]!
+  key: String!
+  data: [ScheduleMessageDto!]!
+}
+
+type DeleteScheduleMessageDto {
+  message: String!
+  id: Int!
+}
+
+input IAllowed {
+  miembro: Boolean!
+  voluntario: Boolean!
+  empleado: Boolean!
+  beneficiario: Boolean!
+  amigo: Boolean!
+  contactoInteres: Boolean!
+}
+
+type Query {
+  getMember: MemberWithQrDto!
+  getAllMembers(filter: FilterMemberDto!, search: String, key: String, order: [String!], limit: Int!, offset: Int!): MembersResponseDto!
+  checkMemberExist(identifier: String!, email: String!): Boolean!
+  recoveryPassword(member: String!): String!
+  confirmMail(token: String!): Members!
+  triggerConfirmEmail(email: String!): String!
+  getOneMember(id: Int!): MemberWithQrDto!
+  getHallsInformation(filter: FilterGetAllHallDto!, search: String, key: String, order: [String!], limit: Int!, offset: Int!): GetAllHallDto!
+  getActivities: getActivitiesDto!
+  getOneUser(id: Int!): UsersDto!
+  getAdmins: [UsersDto!]!
+  getAllContentFeed(filter: [String!], key: String, order: [String!], limit: Int!, offset: Int!): GetAllContentFeedDto!
+  getOneContentFeed(id: Int!): ContentFeedDto!
+  getFutureEntries: [ContentFeedDto!]!
+  getAllEvents(filter: String, key: String, order: [String!], limit: Int!, offset: Int!): EventResponseDto!
+  getOneEvent(id: Int!): EventsDto!
+  getFutureEvents: [EventsDto!]!
+  getAllNews(filter: String, key: String, order: [String!], limit: Int!, offset: Int!): AllMagazineResponseDto!
+  getOneNews(id: Int!): MagazineDto!
+  getMailerSettings: [MailerSettingsDto!]!
+  getMSByDelegation(delegation: String!): MailerSettingsDto!
+  getMSById(id: Int!): MailerSettingsDto!
+  getUserNotifications: [NotificationDto!]!
+  readNotifications: [NotificationDto!]!
+  getPermissions: [PermissionsDto!]!
+  getAllGospels(key: String, order: [String!], limit: Int!, offset: Int!): GospelResponseDto!
+  getFutureGospels: [ScheduleMessageDto!]!
+  getOneGospel(id: Int!): ScheduleMessageDto!
+  getReleasedGospels: [ScheduleMessageDto!]!
+}
+
+input FilterMemberDto {
+  delegations: [Delegations!]
+  isUpdated: Boolean
+  roles: [String!]
+  startDate: String
+  endDate: String
+}
+
+enum Delegations {
+  cancilleria
+  castilla
+  andalucia
+  asturias
+  baleares
+  canarias
+  cantabria
+  cataluna
+  galicia
+  madrid
+  navarraYAragon
+  valencia
+  none
+}
+
+input FilterGetAllHallDto {
+  startDate: String
+  endDate: String
+  activity: String
+}
+
+type Mutation {
+  registerApp(isCms: Boolean, payload: RegisterAppDto!): Members!
+  updateMember(password: String!, lastPassword: String!): Members!
+  downloadMembersAsCsv(payload: DownloadDataDto!): DownloadTableDto!
+  changeMemberPassword(password: String!, token: String!): Members!
+  updateMemberCms(id: Int!, payload: UpdateMemberDto!): Members!
+  deleteMember(id: Int!): String!
+  downloadDataHalls(payload: DownloadDataDto!): DownloadTableDto!
+  createUser(input: CreateUserDto!): UsersDto!
+  inviteAdmin(registerPayload: RegisterDto!): RegisterResponseDto!
+  recoveryCode(input: UpdateUserInputDto!): UpdateUserResponseDto!
+  revokeAdmin(id: Float!): DeleteUserResponseDto!
+  login(loginPayload: LoginInputDto!): LoginResponseDto!
+  LoginApp(payload: LoginAppDto!): LoginAppResponseDto!
+  createContentFeed(payload: CreateContentFeedDto!): ContentFeedDto!
+  updateContentFeed(payload: UpdateContentFeedDto!): ContentFeedDto!
+  deleteContentFeed(id: Int!): DeleteContentFeedDto!
+  downloadEntriesAsCsv(payload: DownloadDataDto!): DownloadTableDto!
+  createEvent(payload: EventsInputDto!): EventsDto!
+  updateEvent(payload: UpdateEventsDto!): EventsDto!
+  deleteEvent(id: Int!): DeleteEventDto!
+  downloadEventsAsCsv(payload: DownloadDataDto!): DownloadTableDto!
+  createNews(payload: MagazineInputDto!): MagazineDto!
+  updateNews(payload: UpdateMagazineInputDto!): MagazineDto!
+  deleteNews(id: Int!): DeleteMagazineDto!
+  updateMailerSettings(payload: [MailerSettingsInputDto!]!): [MailerSettingsDto!]!
+  createAppointment(payload: CreateAppointmentDto!): CreateAppointmentResponseDto!
+  sendSuggestion(payload: CreateSuggestionDto!): CreateSuggestionResponseDto!
+  createCustomNotification(payload: CreateNotificationDto!): CustomNotificationResponseDto!
+  updatePermissions(input: [PermissionsInputDto!]!): [PermissionsDto!]!
+  createGospel(payload: ScheduleMessageInputDto!): ScheduleMessageDto!
+  updateGospel(payload: ScheduleMessageUpdateDto!): ScheduleMessageDto!
+  deleteGospel(id: Int!): DeleteScheduleMessageDto!
+}
+
+input RegisterAppDto {
+  email: String!
+  name: String!
+  lastName: String!
+  password: String!
+  role: Roles = contactoInteres
+  identifier: String!
+  identifierType: IdentifierTypes!
+  location: ILocation
+  customID: String
+  delegation: String = "-"
+}
+
+input ILocation {
+  id: Int
+  street: String
+  streetType: String
+  zipCode: String
+  province: String
+  country: String
+  number: String
+  flat: String
+  city: String
+}
+
+input DownloadDataDto {
+  data: [String!]
+  all: Boolean
+}
+
+input UpdateMemberDto {
+  email: String
+  name: String
+  lastName: String
+  password: String
+  role: Roles
+  identifier: String
+  identifierType: IdentifierTypes
+  location: ILocation
+  delegation: String
+}
+
+input CreateUserDto {
+  email: String!
+  name: String
+  lastName: String
+  password: String!
+  role: String
+}
+
+input RegisterDto {
+  email: String!
+  body: String
+  subject: String
+  link: String
+}
+
+input UpdateUserInputDto {
+  email: String!
+}
+
+input LoginInputDto {
+  email: String!
+  password: String!
+}
+
+input LoginAppDto {
+  username: String!
+  password: String!
+}
+
+input CreateContentFeedDto {
+  allowed: [String!]!
+  categories: [String!]!
+  name: String!
+  delegations: [String!]!
+  releaseDate: String
+  released: Boolean!
+  post: String!
+  image: Upload!
+  imageName: String
+}
+
+"""Upload scalar type"""
+scalar Upload
+
+input UpdateContentFeedDto {
+  id: Int!
+  allowed: [String!]
+  categories: [String!]
+  name: String
+  delegations: [String!]
+  scheduled: Boolean
+  releaseDate: String
+  released: Boolean
+  post: String
+  image: Upload
+  imageName: String
+}
+
+input EventsInputDto {
+  name: String!
+  image: Upload
+  imageName: String
+  description: String!
+  delegation: [String!]!
+  startHour: String!
+  endHour: String!
+  startDate: String!
+  endDate: String!
+  ticketPrice: Float
+  location: ILocation!
+  allowed: [String!]!
+  buyTicketsLink: String
+  releaseDate: String
+  released: Boolean = false
+}
+
+input UpdateEventsDto {
+  id: Int!
+  name: String!
+  image: Upload
+  imageName: String
+  description: String
+  delegation: [String!]
+  startHour: String
+  endHour: String
+  startDate: String
+  endDate: String
+  ticketPrice: Float
+  location: ILocation
+  allowed: [String!]!
+  buyTicketsLink: String
+  releaseDate: String
+  released: Boolean
+}
+
+input MagazineInputDto {
+  name: String!
+  description: String!
+  category: String!
+  pdf: Upload!
+  allowed: [String!]!
+  pdfName: String
+}
+
+input UpdateMagazineInputDto {
+  id: Int!
+  name: String
+  description: String
+  category: String
+  pdf: Upload
+  allowed: [String!]
+  pdfName: String
+}
+
+input MailerSettingsInputDto {
+  id: Int
+  name: MailerSettings!
+  email: String!
+}
+
+input CreateAppointmentDto {
+  reason: String!
+  speciality: String!
+  comment: String!
+  delegation: String!
+  videocall: Boolean!
+  phone: String
+  email: String
+}
+
+input CreateSuggestionDto {
+  reason: String!
+  comment: String!
+  image: ImageDto!
+}
+
+input ImageDto {
+  data: String!
+  name: String!
+  type: String!
+}
+
+input CreateNotificationDto {
+  title: String!
+  description: String!
+  read: Boolean!
+  link: String!
+  member: MembersInputDTO
+}
+
+input MembersInputDTO {
+  email: String!
+  name: String!
+  lastName: String!
+  password: String!
+  role: Roles = contactoInteres
+  identifier: String!
+  identifierType: IdentifierTypes!
+  location: ILocation
+  customID: String
+  delegation: String = "-"
+  id: Int
+}
+
+input PermissionsInputDto {
+  id: Int!
+  name: String!
+  allowed: IAllowed!
+}
+
+input ScheduleMessageInputDto {
+  passage: String!
+  description: String!
+  message: String!
+  released: Boolean
+  releaseDate: String!
+}
+
+input ScheduleMessageUpdateDto {
+  id: Int!
+  passage: String
+  description: String
+  message: String
+  released: Boolean
+  releaseDate: String
+}
+
+type Subscription {
+  notificationAdded(member: Int!): CustomNotificationResponseDto!
+}
